@@ -1,0 +1,9 @@
+#svg-container {
+  max-width: 500px;
+}
+
+#svg-container svg {
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}

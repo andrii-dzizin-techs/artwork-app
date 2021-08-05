@@ -9,7 +9,7 @@ console.log(111);
 
 async function initGeometrizejs() {
   // load png/jpeg/gif,bmp/tiff image from url, file path or Buffer using jimp:
-    const image = await Jimp.read('images/subscribe_success_popup_bg.jpg');
+    const image = await Jimp.read('images/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg');
     const bitmap = Bitmap.createFromByteArray(image.bitmap.width, 
       image.bitmap.height, image.bitmap.data);
     const runner = new ImageRunner(bitmap);
@@ -38,21 +38,30 @@ async function initGeometrizejs() {
       pauseFlag = true;
     const svgContainer = document.getElementById('svg-container'),
       button = document.querySelector('#play_btn');
+
+    const svgStart = SvgExporter.getSvgPrelude() + SvgExporter.getSvgNodeOpen(bitmap.width, bitmap.height);
+    const svgEnd = SvgExporter.getSvgNodeClose();
+    let svg = svgStart + svgData.join('\n') + svgEnd;
+
+    svgContainer.innerHTML = svg
+    const svgEl = document.querySelector('#svg-container svg');;
   
     function myAnimation() {
       if(!pauseFlag && counter < iterations) {
         counter++;
-        svgData.push(SvgExporter.exportShapes(runner.step(options)));
+        // svgData.push(SvgExporter.exportShapes(runner.step(options)));
+
+        svgEl.insertAdjacentHTML('beforeend', SvgExporter.exportShapes(runner.step(options)))
   
-        const svg = SvgExporter.getSvgPrelude() + 
-          SvgExporter.getSvgNodeOpen(bitmap.width, bitmap.height) + 
-          svgData.join('\n') + 
-          SvgExporter.getSvgNodeClose();
+        // svg = svgStart + svgData.join('\n') + svgEnd;
         
-        svgContainer.innerHTML = svg
+        // svgContainer.innerHTML = svg
   
         if(counter < iterations) {
-          requestAnimationFrame(myAnimation);
+          // setTimeout(() => {
+            // myAnimation()
+            requestAnimationFrame(myAnimation)          
+          // }, 500);
         }
       }
     }
@@ -67,9 +76,8 @@ async function initGeometrizejs() {
       button.innerHTML = pauseFlag ? 'Play' : 'Pause';
 
       if (!pauseFlag) {
-        setTimeout(() => {
-          requestAnimationFrame(myAnimation)          
-        }, 500);
+        // myAnimation()
+        requestAnimationFrame(myAnimation)
       } else {
         cancelAnimationFrame(id);
       }
