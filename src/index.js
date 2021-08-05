@@ -44,7 +44,7 @@ async function initGeometrizejs() {
     let svg = svgStart + svgData.join('\n') + svgEnd;
 
     svgContainer.innerHTML = svg
-    const svgEl = document.querySelector('#svg-container svg');;
+    const svgEl = document.querySelector('#svg-container svg');
   
     function myAnimation() {
       if(!pauseFlag && counter < iterations) {
@@ -60,7 +60,9 @@ async function initGeometrizejs() {
         if(counter < iterations) {
           // setTimeout(() => {
             // myAnimation()
-            requestAnimationFrame(myAnimation)          
+            requestAnimationFrame(myAnimation)
+            pauseFlag = true;
+            button.innerHTML = pauseFlag ? 'Play' : 'Pause';
           // }, 500);
         }
       }
