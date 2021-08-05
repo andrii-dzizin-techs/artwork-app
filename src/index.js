@@ -61,9 +61,11 @@ async function initGeometrizejs() {
           // setTimeout(() => {
             // myAnimation()
             requestAnimationFrame(myAnimation)
-            pauseFlag = true;
-            button.innerHTML = pauseFlag ? 'Play' : 'Pause';
+            
           // }, 500);
+        } else {
+          pauseFlag = false;
+          button.innerHTML = pauseFlag ? 'Play' : 'Pause';
         }
       }
     }
