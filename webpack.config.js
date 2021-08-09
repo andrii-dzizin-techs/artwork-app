@@ -8,9 +8,9 @@
 // config.node = { fs: 'empty' };
 
 module.exports = {
-  mode: 'development',
-  // mode: 'production',
-  watch: true,
+  // mode: 'development',
+  mode: 'production',
+  // watch: true,
   target: 'web',
   node: {
     fs: 'empty'
@@ -23,13 +23,13 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
-          // options: {
-          //   presets: [['@babel/preset-env', {
-          //       // debug: true,
-          //       corejs: 3,
-          //       useBuiltIns: "usage"
-          //   }]]
-          // }
+          options: {
+            presets: [['@babel/preset-env', {
+                // debug: true,
+                corejs: 3,
+                useBuiltIns: "usage"
+            }]]
+          }
         }
       },
       // {
